@@ -22,7 +22,7 @@ func SafeRender(w http.ResponseWriter, r *http.Request, name string, data map[st
 }
 
 func RenderAsJson(w http.ResponseWriter, data ...interface{}) {
-	w.Header().Set("Access-Control-Allow-Origin", "https://your-specific-domain.com")
+	w.Header().Set("Access-Control-Allow-Origin", "https://example.com") // Set to specific domain
 	w.Header().Set("Access-Control-Allow-Credentials", "true")
 	w.Header().Set("Access-Control-Allow-Methods", "POST, GET")
 	w.Header().Set("Content-Type", "application/json")
@@ -31,6 +31,10 @@ func RenderAsJson(w http.ResponseWriter, data ...interface{}) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	w.Write(b)
+	// QWIETAI-AUTOFIX
+}
+
 	w.Write(b)
 }
 
@@ -47,5 +51,6 @@ func UnSafeRender(w http.ResponseWriter, name string, data ...interface{}) {
 func ToHTML(text string) template.HTML {
 	return template.HTML(text)
 }
+
 
 
