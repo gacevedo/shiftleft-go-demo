@@ -22,7 +22,7 @@ func SafeRender(w http.ResponseWriter, r *http.Request, name string, data map[st
 }
 
 func RenderAsJson(w http.ResponseWriter, data ...interface{}) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "https://example.com") // Specify the domain of the web app that is allowed to make requests
 	w.Header().Set("Access-Control-Allow-Credentials", "true")
 	w.Header().Set("Access-Control-Allow-Methods", "POST, GET")
 	w.Header().Set("Content-Type", "application/json")
@@ -34,6 +34,9 @@ func RenderAsJson(w http.ResponseWriter, data ...interface{}) {
 	w.Write(b)
 }
 
+	w.Write(b)
+}
+
 func UnSafeRender(w http.ResponseWriter, name string, data ...interface{}) {
 	template := template.Must(template.ParseGlob("templates/*"))
 	template.ExecuteTemplate(w, name, data)
@@ -42,3 +45,4 @@ func UnSafeRender(w http.ResponseWriter, name string, data ...interface{}) {
 func ToHTML(text string) template.HTML {
 	return template.HTML(text)
 }
+
